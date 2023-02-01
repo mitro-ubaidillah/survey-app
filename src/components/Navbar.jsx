@@ -1,8 +1,8 @@
-import { Box, Button, Flex, Menu, Stack } from '@chakra-ui/react';
+import { Box, Button, Flex, Image, Menu, Stack } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { FaMosque } from 'react-icons/fa';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/icons/mosque_icon.png';
 
 const Navbar = () => {
     const [isOpen, SetIsOpen] = useState(false);
@@ -12,7 +12,7 @@ const Navbar = () => {
         <Box position={"sticky"} top={"0"} zIndex={"10"}>
             <NavBarContainer>
                 <Link to={'/'}>
-                    <FaMosque size={'80'} color='white'/>
+                    <Image src={logo} width={{ base:'40px',md:'60px',lg:'75px' }} />
                 </Link>
                 <MenuToggle toggle={toggle} isOpen={isOpen} />
                 <MenuLinks
@@ -72,8 +72,9 @@ const NavBarContainer = ({ children, ...props }) => {
             justify="space-between"
             wrap="wrap"
             w="100%"
+            bg={'transparent'}
             mb={{ base: 0, md: 0 }}
-            py={{ base: 0, md: 0 }}
+            py={{ base: 5, md: 0 }}
             px={20}
             {...props}
             height={{ base: "0", md: "auto" }}

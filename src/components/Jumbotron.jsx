@@ -1,39 +1,27 @@
 import { Box, Button, Flex, Img, Text } from '@chakra-ui/react';
 import React from 'react';
-import imgMasjid from '../assets/images/masjid.jpg';
 import muslim from '../assets/images/muslim.png';
 
-const Jumbotron = ({ navbar }) => {
+const Jumbotron = () => {
     return (
-        <Box
-            bgImage={`url(${imgMasjid})`}
-            backgroundSize={'cover'}
-            backgroundPosition={'top'}
-        >
             <Flex
-                maxHeight={'100vh'}
-                height={'100vh'}
                 justify={'center'}
                 align={'center'}
                 px={'14'}
                 wrap={'wrap'}
-                backdropFilter='auto' backdropBlur='3px'
-                bg={'#00000093'}
+                flexDirection={{ base:'column',md:'row',lg:'row' }}
+                mt={{ base:'10',md:'16' }}
             >
-                <Box
-                    flexBasis={'100%'}
-                >
-                    {navbar}
-                </Box>
                 <Box
                     flexBasis={'50%'}
                     color={'white'}
                     pb={'20'}
                 >
                     <Text
-                        fontSize={'60px'}
+                        fontSize={{ base:'30px', md:'35px',lg:'50px', xl:'60px' }}
                         fontWeight={'700'}
                         mb={'20px'}
+                        textAlign={{ base:'center', md:'left' }}
                     >
                         Online Survey Kunjungan Masjid <br /> Ar-Rahman Kota Blitar
                     </Text>
@@ -41,15 +29,17 @@ const Jumbotron = ({ navbar }) => {
                         lineHeight={'30px'}
                         align={'justify'}
                         mb={'30px'}
-                        fontSize={'20px'}
+                        fontSize={{ md:'14px',lg:'20px' }}
+                        display={{ base:'none', md:'block' }}
                     >
                         Setelah mengunjungi masjid, jangan lupa untuk mengisi surveymu. Karena dengan survey tersebut membantu kami untuk meingkatkan pelayanan kami. Karena Kepuasan pengunjung adalah ibadahku
                     </Text>
                     <Button
                         color={'black'}
-                        fontSize={'24px'}
+                        fontSize={{ base:'14px',lg:'24px' }}
                         px={'10'}
-                        height={'60px'}
+                        width={{ base:'full', md:'auto' }}
+                        height={{ base:'40px',lg:'60px' }}
                         fontWeight={'700'}
                     >
                         Isi Survey Sekarang
@@ -57,12 +47,12 @@ const Jumbotron = ({ navbar }) => {
                 </Box>
                 <Box
                     flexBasis={'45%'}
-                    mb={'10'}
+                    mb={{ base:'0',lg:'10' }}
                 >
                     <Img
                         mx={'auto'}
                         src={muslim}
-                        width={'80%'}
+                        width={{ base:'auto',sm:'300px',md:'350px',lg:'80%' }}
                     />
                     <Box
                         mx={'auto'}
@@ -70,11 +60,11 @@ const Jumbotron = ({ navbar }) => {
                         width={'80%'}
                         height={'100px'}
                         borderRadius={'3xl'}
+                        display={{ base:'none', md:'block' }}
                     >
                     </Box>
                 </Box>
             </Flex>
-        </Box>
     );
 }
 
