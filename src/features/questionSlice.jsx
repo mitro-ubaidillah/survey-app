@@ -21,6 +21,7 @@ export const questionSlice = createSlice({
             Cookies.remove('quests');
             Cookies.remove('currentAnswer');
             Cookies.remove('currentNumber');
+            Cookies.remove('questNumber');
         }
     }
 })

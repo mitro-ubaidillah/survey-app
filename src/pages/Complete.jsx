@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../components/Layout';
-import { Box, Text } from '@chakra-ui/layout';
+import { Box, Flex, Text } from '@chakra-ui/layout';
 import CardQuestion from '../components/CardQuestion';
 import { ButtonGroup } from '@chakra-ui/button';
 import ButtonQuestion from '../components/ButtonQuestion';
@@ -30,36 +30,40 @@ const Complete = () => {
                 <CardQuestion
                     quest={'Survey Complete'}
                     textAlign={'center'}
-                    fontSize={'70px'}
-                    mb={'20'}
+                    fontSize={{ base:'35px',md:'40px',lg:'70px' }}
+                    mb={{ base:'0',lg:'20' }}
                     children={
                         <Box
                             textAlign={'center'}
                         >
                             <Text
-                                fontSize={'30px'}
+                                fontSize={{ base:'22px',md:'26px',lg:'30px' }}
                                 mb={'4'}
                             >
                                 Thanks for your Answer 😁
                             </Text>
                             <Text
-                                fontSize={'20px'}
+                                fontSize={{ base:'14px',md:'20px' }}
                                 mb={'20'}
                             >
                                 Your answer will help us improve our quality again. Hopefully, your can good experience 😇
                             </Text>
-                            <ButtonGroup
+                            <Flex
+                                justify={'center'}
                                 mb={'20'}
                                 color={'white'}
-                                gap={'5'}
+                                gap={{ base:'5',md:'5' }}
+                                flexDirection={{ base:'column', md:'row' }}
                             >
                                 <ButtonQuestion
                                     bg={'btn.primary'}
                                     _hover={{ bg: 'btn.secondary' }}
                                     name={'Back to Home'}
+                                    width={{ base:'full',md:'auto' }}
                                     onClick={backToHome}
-                                />
+                                    />
                                 <ButtonQuestion
+                                    width={{ base:'full',md:'auto' }}
                                     border={'2px'}
                                     borderColor={'btn.primary'}
                                     color={'btn.primary'}
@@ -68,7 +72,7 @@ const Complete = () => {
                                     name={'Survey Again'}
                                     onClick={backToSurvey}
                                 />
-                            </ButtonGroup>
+                            </Flex>
                             <Box>
                                 <Text
                                     textAlign={'right'}
