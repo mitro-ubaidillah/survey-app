@@ -14,7 +14,7 @@ export const questionSlice = createSlice({
             state.push(newQuest);
             Cookies.set('quests', JSON.stringify(state));
             Cookies.set('questNumber', newQuest.id);
-            Cookies.set('currentAnswer', action.payload.answer);
+            Cookies.set('currentAnswer', newQuest.answer);
         }
     }
 })

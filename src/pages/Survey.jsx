@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import { Box, Flex, Grid, HStack, Stack, Text } from '@chakra-ui/layout';
 import CardQuestion from '../components/CardQuestion';
@@ -9,41 +9,70 @@ import { Radio, RadioGroup, useRadioGroup } from '@chakra-ui/radio';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { addQuests } from '../features/questionSlice';
+import { useNavigate } from 'react-router';
 
 const Survey = () => {
     const [questNumber, setQuestNumber] = useState(1);
     const [chooseAnswer, setChooseAnswer] = useState();
-    const dispatch = useDispatch();
-    const [currentQuestNumber, setCurrentQuestNumber] = useState(parseInt(Cookies.get('questNumber'))+1 || 1);
-    // const quests = useSelector((state) => state.quests);
+    const [currentQuestNumber, setCurrentQuestNumber] = useState(parseInt(Cookies.get('questNumber')) + 1 || 1);
+    const quests = useSelector((state) => state.quests);
     const currentAnswer = Cookies.get('currentAnswer')?.replace('20%', ' ');
-    const currentNumber = Cookies.get('questNumber');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    let timeLimit = 5000;
 
     const lastQuestIndex = currentQuestNumber * questNumber;
     const firstQuestIndex = lastQuestIndex - questNumber;
     const currentQuest = questionData.slice(firstQuestIndex, lastQuestIndex);
 
-    const { getRadioProps, getRootProps } = useRadioGroup({
-        name: "test",
-        defaultValue: '',
-        onChange: setChooseAnswer,
-    });
-    const group = getRootProps();
-
-    const onCompleteQuestion = () => {
-        // setCurrentQuestNumber(currentQuestNumber + 1)
+    const saveAnswer = (value) => {
+        setChooseAnswer(value);
+        Cookies.set('currentAnswer', value)
     }
 
-    const onNextQuestion = (quest) => {
-        setCurrentQuestNumber(currentQuestNumber + 1)
+    const onCompleteQuestion = (quest) => {
         dispatch(addQuests(
             {
                 id: quest.id,
                 quest: quest.question,
-                answer: chooseAnswer.toString()
+                answer: chooseAnswer
             }
         ))
+        clearTimeout(limitTime);
+        navigate('/complete');
     }
+
+    const onNextQuestion = (quest) => {
+        dispatch(addQuests(
+            {
+                id: quest.id,
+                quest: quest.question,
+                answer: chooseAnswer
+            }
+        ))
+        Cookies.set('currentAnswer', '');
+        Cookies.set('questNumber', currentQuestNumber + 1);
+        timeLimit = 5000;
+        clearTimeout(limitTime);
+        setCurrentQuestNumber(currentQuestNumber + 1)
+    }
+    
+    const limitTime = (time) => {
+        const currentData = currentQuest.filter(data => (data.id === currentQuestNumber));
+        setTimeout(() => {
+            if(currentQuestNumber == 10) {
+                onCompleteQuestion(currentData[0]);
+            }else{
+                onNextQuestion(currentData[0]);
+            }
+        }, time);
+    }
+    
+    console.log(quests)
+
+    useEffect(() => {
+        limitTime(timeLimit);
+    }, [currentQuestNumber]);
 
     return (
         <Layout>
@@ -73,17 +102,19 @@ const Survey = () => {
                                     key={data.id}
                                     children={
                                         <RadioGroup
-                                            defaultValue={data.id == currentNumber ? currentAnswer : ''}
+                                            defaultValue={currentAnswer}
                                         >
                                             <Stack
                                                 direction='column'
                                                 gap={'3'}
-                                                {...group}
                                             >
                                                 {
                                                     data.answers.map(item => (
                                                         <Radio
-                                                            {...getRadioProps({ value: item.answer })}
+                                                            // {...getRadioProps({ value: item.answer })}
+                                                            onChange={() => saveAnswer(item.answer)}
+                                                            value={item.answer}
+                                                            checked={currentAnswer == item.answer}
                                                             colorScheme={'purple'}
                                                             key={item.id}
                                                         >
@@ -96,7 +127,7 @@ const Survey = () => {
                                     }
                                 />
                                 <ButtonQuestion
-                                    key={data.id+1}
+                                    key={data.id + 1}
                                     name={currentQuestNumber == 10 ? 'Complete' : 'Next'}
                                     borderRadius={'2xl'}
                                     color={'white'}
@@ -107,7 +138,7 @@ const Survey = () => {
                                     height={'55px'}
                                     fontSize={'20px'}
                                     _hover={{ bg: 'btn.secondary' }}
-                                    onClick={() => currentQuestNumber == 10 ? onCompleteQuestion() : onNextQuestion(data)}
+                                    onClick={() => currentQuestNumber == 10 ? onCompleteQuestion(data) : onNextQuestion(data)}
                                 />
                             </Box>
                         )
