@@ -3,7 +3,7 @@ import { Stack, Text } from '@chakra-ui/layout';
 import { Radio, RadioGroup } from '@chakra-ui/radio';
 import React from 'react';
 
-const CardQuestion = ({ quest, children }) => {
+const CardQuestion = ({ quest, children, ...props }) => {
     return (
         <Card
             minWidth={{ base: '300px', sm: '450px', md: '650px', lg: '900px', xl: '1200px' }}
@@ -18,6 +18,7 @@ const CardQuestion = ({ quest, children }) => {
                     fontWeight={'700'}
                     color={'btn.primary'}
                     mb={'10'}
+                    {...props}
                 >
                     {quest}
                 </Text>

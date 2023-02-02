@@ -1,14 +1,27 @@
 import React from 'react';
 import Layout from '../components/Layout';
-import { Text } from '@chakra-ui/layout';
-import { useSelector } from 'react-redux';
+import { Box, Text } from '@chakra-ui/layout';
+import CardQuestion from '../components/CardQuestion';
 
 const Complete = () => {
-    const quests = useSelector((state) => state.quests);
-    console.log(quests);
     return (
         <Layout>
-            <Text>Survey Complete</Text>
+            <Box
+                my={'20'}
+            >
+                <CardQuestion
+                    quest={'Survey Complete'}
+                    textAlign={'center'}
+                    children={
+                        <Text
+                            fontSize={'30px'}
+                            textAlign={'center'}
+                        >
+                            Thanks for your Answer 😁
+                        </Text>
+                    }
+                />
+            </Box>
         </Layout>
     );
 }

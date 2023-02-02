@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import { Box, Flex, Grid, HStack, Stack, Text } from '@chakra-ui/layout';
+import { Box, Grid, Stack } from '@chakra-ui/layout';
 import CardQuestion from '../components/CardQuestion';
 import ProgressBar from '../components/ProgressBar';
 import ButtonQuestion from '../components/ButtonQuestion';
 import { questionData } from '../utils/Data';
-import { Radio, RadioGroup, useRadioGroup } from '@chakra-ui/radio';
+import { Radio, RadioGroup } from '@chakra-ui/radio';
 import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { addQuests } from '../features/questionSlice';
@@ -38,7 +38,6 @@ const Survey = () => {
                 answer: chooseAnswer
             }
         ))
-        clearTimeout(limitTime);
         navigate('/complete');
     }
 
@@ -52,26 +51,19 @@ const Survey = () => {
         ))
         Cookies.set('currentAnswer', '');
         Cookies.set('questNumber', currentQuestNumber + 1);
-        timeLimit = 5000;
-        clearTimeout(limitTime);
         setCurrentQuestNumber(currentQuestNumber + 1)
     }
-    
-    const limitTime = (time) => {
-        const currentData = currentQuest.filter(data => (data.id === currentQuestNumber));
-        setTimeout(() => {
-            if(currentQuestNumber == 10) {
-                onCompleteQuestion(currentData[0]);
-            }else{
-                onNextQuestion(currentData[0]);
-            }
-        }, time);
-    }
-    
-    console.log(quests)
 
     useEffect(() => {
-        limitTime(timeLimit);
+        const currentData = currentQuest.filter(data => (data.id === currentQuestNumber));
+        const limitTime = setTimeout(() => {
+            if (currentQuestNumber == 10) {
+                onCompleteQuestion(currentData[0]);
+            } else {
+                onNextQuestion(currentData[0]);
+            }
+        }, timeLimit);
+        return () => clearTimeout(limitTime);
     }, [currentQuestNumber]);
 
     return (
@@ -111,7 +103,6 @@ const Survey = () => {
                                                 {
                                                     data.answers.map(item => (
                                                         <Radio
-                                                            // {...getRadioProps({ value: item.answer })}
                                                             onChange={() => saveAnswer(item.answer)}
                                                             value={item.answer}
                                                             checked={currentAnswer == item.answer}
