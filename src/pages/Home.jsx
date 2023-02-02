@@ -1,11 +1,9 @@
-import { Box, Text, useDisclosure } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import Jumbotron from '../components/Jumbotron';
-import Navbar from '../components/Navbar';
 import Layout from '../components/Layout';
 import { useNavigate } from 'react-router';
 import ModalBox from '../components/ModalBox';
-import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { addName } from '../features/questionSlice';
 import Cookies from 'js-cookie';
