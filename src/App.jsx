@@ -12,6 +12,7 @@ import theme from './utils/extendedTheme'
 import { Provider } from 'react-redux'
 import store from '../store'
 import Complete from './pages/Complete'
+import ErrorPage from './pages/ErrorPage'
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
             <Route path='/' element={<Home />} />
             <Route path='/survey' element={<Survey />} />
             <Route path='/complete' element={<Complete />} />
+            <Route path='/*' element={<ErrorPage />} />
           </Routes>
         </ChakraProvider>
       </BrowserRouter>
