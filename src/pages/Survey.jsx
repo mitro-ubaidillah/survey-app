@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import { Box, Grid, Stack } from '@chakra-ui/layout';
+import { Box, Grid, Stack, Text } from '@chakra-ui/layout';
 import CardQuestion from '../components/CardQuestion';
 import ProgressBar from '../components/ProgressBar';
 import ButtonQuestion from '../components/ButtonQuestion';
@@ -10,6 +10,8 @@ import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { addQuests } from '../features/questionSlice';
 import { useNavigate } from 'react-router';
+import { Button } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 const Survey = () => {
     const [questNumber, setQuestNumber] = useState(1);
@@ -68,6 +70,20 @@ const Survey = () => {
 
     return (
         <Layout>
+            <Box
+                mt={'10'}
+            >
+                <Link
+                    to={'/'}
+                >
+                    <Text
+                        color='btn.primary'
+                        fontWeight={'600'}
+                    >
+                        Back to Home
+                    </Text>
+                </Link>
+            </Box>
             <Grid
                 my={'10'}
                 templateColumns='repeat(10, 1fr)'
