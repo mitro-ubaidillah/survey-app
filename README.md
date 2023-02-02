@@ -14,7 +14,7 @@
 
 Survey App is an Application example to make survey web or mobile application. You can clone this application or you can download. Don't forget to star this repo
 
-[View Application](https://https://survey-app-gray-two.vercel.app/)
+[View Application](https://survey-app-gray-two.vercel.app/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -66,7 +66,7 @@ You can download Node js to run this project
 
 demo aplikasi
 
-_For more examples, please refer to the [Documentation](https://https://survey-app-gray-two.vercel.app/)_
+_For more examples, please refer to the [Documentation](https://survey-app-gray-two.vercel.app/)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
