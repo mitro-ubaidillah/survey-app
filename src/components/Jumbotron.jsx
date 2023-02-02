@@ -25,7 +25,7 @@ const Jumbotron = ({onClickSurvey}) => {
                     textAlign={{ base: 'center', md: 'left' }}
                     color={'btn.primary'}
                     >
-                    Online Survey Kunjungan Masjid <br /> Ar-Rahman Kota Blitar
+                    Online Survey Shopping Online <br /> Abah Store.com
                 </Text>
                 <Text
                     color={'btn.secondary'}
@@ -35,10 +35,10 @@ const Jumbotron = ({onClickSurvey}) => {
                     fontSize={{ md: '14px', lg: '24px' }}
                     display={{ base: 'none', md: 'block' }}
                 >
-                    Setelah mengunjungi masjid, jangan lupa untuk mengisi surveymu. Karena dengan survey tersebut membantu kami untuk meingkatkan pelayanan kami. Karena Kepuasan pengunjung adalah ibadahku
+                    Thank you for visiting. Don't forget to fill out the survey. Because your survey helps us to improve the quality of our products 🥰
                 </Text>
                 <ButtonQuestion
-                    name='Isi Survey Sekarang'
+                    name='Survey Now'
                     onClick={()=>onClickSurvey()}
                     borderRadius={'2xl'}
                     color={'white'}

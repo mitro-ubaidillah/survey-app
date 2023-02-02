@@ -22,9 +22,17 @@ export const questionSlice = createSlice({
             Cookies.remove('currentAnswer');
             Cookies.remove('currentNumber');
             Cookies.remove('questNumber');
-        }
+            Cookies.remove('profile');
+        },
+        addName: (state, action) => {
+            const newData = {
+                name: action.payload.name,
+                email: action.payload.email,
+            }
+            Cookies.set('profile', JSON.stringify(newData));
+        },
     }
 })
 
-export const { addQuests, destroyQuests } = questionSlice.actions;
+export const { addQuests, destroyQuests, addName } = questionSlice.actions;
 export default questionSlice.reducer;

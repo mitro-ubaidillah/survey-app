@@ -2,7 +2,6 @@ import React from 'react';
 import Layout from '../components/Layout';
 import { Box, Flex, Text } from '@chakra-ui/layout';
 import CardQuestion from '../components/CardQuestion';
-import { ButtonGroup } from '@chakra-ui/button';
 import ButtonQuestion from '../components/ButtonQuestion';
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
