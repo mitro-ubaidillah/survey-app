@@ -15,9 +15,15 @@ export const questionSlice = createSlice({
             Cookies.set('quests', JSON.stringify(state));
             Cookies.set('questNumber', newQuest.id);
             Cookies.set('currentAnswer', newQuest.answer);
+        },
+        destroyQuests: (state, action) => {
+            state = [];
+            Cookies.remove('quests');
+            Cookies.remove('currentAnswer');
+            Cookies.remove('currentNumber');
         }
     }
 })
 
-export const { addQuests } = questionSlice.actions;
+export const { addQuests, destroyQuests } = questionSlice.actions;
 export default questionSlice.reducer;
