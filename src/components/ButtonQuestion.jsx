@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/button';
 import React from 'react';
 
-const ButtonQuestion = ({ name, to, ...props }) => {
+const ButtonQuestion = ({ name, ...props }) => {
     return (
         <Button
             {...props}
